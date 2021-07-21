@@ -15,10 +15,14 @@ const App = () => {
       body: limit,
     })
     const responseBody = await response.json()
-    setGenres(responseBody.data.reference_list.values)
+    if(responseBody.data){
+      setGenres(responseBody.data.reference_list.values)
+    }else{
+      console.log('error, no hay respuesta de getGenres')
+    }
   }
 
-  console.log(limit)
+  console.log('limit:'+limit)
 
   useEffect(() => {
     fetchData()
