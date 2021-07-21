@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 
 exports.handler = async function (event) {
   const body = JSON.parse(event.body)
+  //const body = "Action"
   const genre = body.genre
   const pageState = body.pageState
   const url = process.env.ASTRA_GRAPHQL_ENDPOINT
@@ -22,7 +23,8 @@ exports.handler = async function (event) {
       pageState
     }
   }
-  `  
+  ` 
+  
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -32,8 +34,12 @@ exports.handler = async function (event) {
     body: JSON.stringify({ query })
   })
 
+
   try {
     const responseBody = await response.json()
+//    if( responseBody.code != 200 ){
+//      throw new Error(responseBody.message)
+//    }
     return {
       statusCode: 200,
       body: JSON.stringify(responseBody)

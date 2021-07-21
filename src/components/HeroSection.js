@@ -6,12 +6,17 @@ const HeroSection = () => {
 
   const fetchData = async () => {
     const response = await fetch("/.netlify/functions/getMovies", {
-      method: "POST",
-      body: JSON.stringify({ genre: "Sci-Fi", pageState: pageState }),
+        method: "POST",
+        body: JSON.stringify({ genre: "Action", pageState: pageState})
     })
     const responseBody = await response.json()
-    const movies = responseBody.data.movies_by_genre.values
-    setMovie(movies[Math.floor(Math.random() * movies.length)])
+    if(responseBody.data){
+      const movies = responseBody.data.movies_by_genre.values
+      const randomIndex = Math.floor( Math.random() * movies.length )
+      setMovie( movies[randomIndex] )
+    }else{
+      console.log('getMovies ERROR: '+responseBody.message)
+    }
   }
 
   useEffect(() => {
