@@ -13,7 +13,7 @@ const HeroSection = () => {
     if(responseBody.data){
       const movies = responseBody.data.movies_by_genre.values
       //const randomIndex = Math.floor( Math.random() * movies.length )
-      const myMovieIndex = 2
+      const myMovieIndex = 1
       setMovie( movies[myMovieIndex] )
       //setMovie( movies[randomIndex] )
     }else{
